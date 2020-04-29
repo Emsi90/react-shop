@@ -13,6 +13,7 @@ import ProductsPage from 'Pages/ProductsPage';
 import ProductPage from 'Pages/ProductPage';
 import LoginPage from 'Pages/LoginPage';
 import NotFoundPage from 'Pages/NotFoundPage';
+import ContactUsPage from 'Pages/ContactUsPage';
 // import AdminPage from 'Pages/AdminPage';
 const AdminPage = React.lazy(() =>
   import(/* webpackChunkName: "AdminPage" */ 'Pages/AdminPage')
@@ -48,6 +49,7 @@ const Routes: React.FC<RouteComponentProps> = (props) => {
             <Redirect exact from='/' to='/products'></Redirect>
             <Route exact path='/products' component={ProductsPage} />
             <Route path='/products/:id' component={ProductPage} />
+            <Route path='/contactus' component={ContactUsPage} />
             <Route path='/admin'>
               {loggedIn ? (
                 <Suspense
