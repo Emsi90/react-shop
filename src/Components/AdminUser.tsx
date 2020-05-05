@@ -1,8 +1,8 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { User } from 'ts/interfaces/User';
-import { adminUsersData } from 'Data/UserData';
+import { User } from 'constants/interfaces/User';
+import { adminUsersData } from 'data/UserData';
 
 const AdminUser: React.SFC<RouteComponentProps<{ id: string }>> = (props) => {
   let user: User;

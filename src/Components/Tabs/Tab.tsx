@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
-import { TabProps } from 'ts/interfaces/Tabs';
+import { TabProps } from 'constants/interfaces/Tabs';
 
-import { useTabsContext } from 'Context/TabsContext';
+import { useTabsContext } from 'context/tabsContext';
 
 const Tab: React.FC<TabProps> = (props) => {
   const { activeCard, setActiveCard } = useTabsContext();

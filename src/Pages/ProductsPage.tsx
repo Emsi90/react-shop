@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { products } from 'Data/ProductData';
-import { Product } from 'ts/interfaces/Product';
+import { products } from 'data/ProductData';
+import { Product } from 'constants/interfaces/Product';
 
 const ProductsPage: React.FC<RouteComponentProps> = (props) => {
   const [productsState, setProductsState] = useState<Product[]>([]);

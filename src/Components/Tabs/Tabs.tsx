@@ -1,12 +1,12 @@
 import React from 'react';
-import { ITabs } from 'ts/interfaces/Tabs';
+import { TabsBody } from 'constants/interfaces/Tabs';
 import Tab from './Tab';
 import './Tabs.scss';
 import TabContent from './TabContent';
 
-import { TabsProvider } from 'Context/TabsContext';
+import { TabsProvider } from 'context/tabsContext';
 
-const Tabs: React.FC & ITabs = ({ children }) => {
+const Tabs: React.FC & TabsBody = ({ children }) => {
   return (
     <>
       <TabsProvider>

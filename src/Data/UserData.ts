@@ -1,4 +1,4 @@
-import { User } from 'ts/interfaces/User';
+import { User } from 'constants/interfaces/User';
 
 export const adminUsersData: User[] = [
   { id: 1, name: 'Fred', isAdmin: true },

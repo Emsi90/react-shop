@@ -1,4 +1,4 @@
-import { Product } from 'ts/interfaces/Product';
+import { Product } from 'constants/interfaces/Product';
 
 export const products: Product[] = [
   {
@@ -54,6 +54,11 @@ export const products: Product[] = [
 
 const wait = (ms: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const getProducts = async (): Promise<Product[]> => {
+  await wait(1000);
+  return products;
 };
 
 export const getProduct = async (id: number): Promise<Product | null> => {

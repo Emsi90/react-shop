@@ -1,51 +1,32 @@
 import React from 'react';
-import './ContactUs.scss';
-import { ActionType } from 'ts/interfaces/Contact';
+import Form from 'components/Form/Form';
+import { Values, SubmitResult } from 'constants/interfaces/Form';
+import { minLength, required } from 'utils/formValidators';
 
 interface Props {
-  name: string;
-  email: string;
-  reason: string;
-  notes: string;
-  onChange: (payload: any) => void;
+  onSubmit: (values: Values) => Promise<SubmitResult>;
 }
 
-const ContactUs: React.FC<Props> = ({
-  name,
-  email,
-  reason,
-  notes,
-  onChange,
-}) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange({
-      type: e.currentTarget.id.toUpperCase(),
-      payload: e.currentTarget.value,
-    });
-  };
+const ContactUs: React.FC<Props> = ({ onSubmit }) => {
   return (
-    <form className='form' noValidate={true}>
-      <div className='form-group'>
-        <label htmlFor='name'>Your name</label>
-        <input
-          type='text'
-          id='name'
-          name={ActionType.NAME}
-          value={name}
-          onChange={handleChange}
-        />
-      </div>
-      <div className='form-group'>
-        <label htmlFor='email'>Your email</label>
-        <input
-          type='email'
-          id='email'
-          name={ActionType.EMAIL}
-          value={email}
-          onChange={handleChange}
-        />
-      </div>
-    </form>
+    <Form
+      defaultValues={{ name: '', email: '', reason: 'Support', notes: '' }}
+      validationRules={{
+        email: { validator: required },
+        name: [{ validator: required }, { validator: minLength, arg: 2 }],
+      }}
+      onSubmit={onSubmit}
+    >
+      <Form.Field name='name' label='Your name' />
+      <Form.Field name='email' label='Your email address' type='Email' />
+      <Form.Field
+        name='reason'
+        label='Reason you need to contact us'
+        type='Select'
+        options={['Marketing', 'Support', 'Feedback', 'Jobs', 'Other']}
+      />
+      <Form.Field name='notes' label='Additional notes' type='TextArea' />
+    </Form>
   );
 };
 

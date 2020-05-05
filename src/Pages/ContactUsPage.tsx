@@ -1,27 +1,22 @@
-import React, { useReducer } from 'react';
-import ContactUs from 'Components/ContactUs';
-import { State, Action, ActionType } from 'ts/interfaces/Contact';
-
-const initialState: State = { name: '', email: '', reason: '', notes: '' };
-
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case ActionType.NAME:
-      return { ...state, name: action.payload };
-    case ActionType.EMAIL:
-      return { ...state, email: action.payload };
-    case ActionType.REASON:
-      return { ...state, reason: action.payload };
-    case ActionType.NOTES:
-      return { ...state, notes: action.payload };
-    default:
-      return state;
-  }
-}
+import React from 'react';
+import ContactUs from 'components/ContactUs';
+import { SubmitResult, Values } from 'constants/interfaces/Form';
 
 const ContactUsPage: React.FC = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+  const wait = (ms: number): Promise<void> => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const handleSubmit = async (values: Values): Promise<SubmitResult> => {
+    await wait(1000); // simulate asynchronous web API call
+    return {
+      // errors: {
+      //   email: ['Some is wrong with this'],
+      // },
+      success: true,
+    };
+  };
+
   return (
     <div>
       <div className='page-container'>
@@ -29,13 +24,7 @@ const ContactUsPage: React.FC = (props) => {
         <p>
           If you enter your details we'll get back to you as soon as we can.
         </p>
-        <ContactUs
-          name={state.name}
-          email={state.email}
-          reason={state.reason}
-          notes={state.notes}
-          onChange={(payload) => dispatch(payload)}
-        />
+        <ContactUs onSubmit={handleSubmit} />
       </div>
     </div>
   );

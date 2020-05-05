@@ -8,15 +8,15 @@ import {
 } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import Header from 'Components/Header';
-import ProductsPage from 'Pages/ProductsPage';
-import ProductPage from 'Pages/ProductPage';
-import LoginPage from 'Pages/LoginPage';
-import NotFoundPage from 'Pages/NotFoundPage';
-import ContactUsPage from 'Pages/ContactUsPage';
+import Header from 'components/Header';
+import ProductsPage from 'pages/ProductsPage';
+import ProductPage from 'pages/ProductPage';
+import LoginPage from 'pages/LoginPage';
+import NotFoundPage from 'pages/NotFoundPage';
+import ContactUsPage from 'pages/ContactUsPage';
 // import AdminPage from 'Pages/AdminPage';
 const AdminPage = React.lazy(() =>
-  import(/* webpackChunkName: "AdminPage" */ 'Pages/AdminPage')
+  import(/* webpackChunkName: "AdminPage" */ 'pages/AdminPage')
 );
 
 const RoutesWrap: React.FC = () => {

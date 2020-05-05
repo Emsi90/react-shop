@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 
-import AdminUsers from 'Components/AdminUsers';
-import AdminProducts from 'Components/AdminProducts';
+import AdminUsers from 'components/AdminUsers';
+import AdminProducts from 'components/AdminProducts';
 
 const AdminPage: React.FC = () => {
   return (

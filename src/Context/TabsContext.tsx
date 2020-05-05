@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { ITabsContext, ActiveCard } from 'ts/interfaces/Tabs';
+import { ContextTabs, ActiveCard } from 'constants/interfaces/Tabs';
 
-const TabsContext = React.createContext<ITabsContext>({});
+const TabsContext = React.createContext<ContextTabs>({});
 
 export const useTabsContext = () => {
   const context = React.useContext(TabsContext);

@@ -1,0 +1,35 @@
+import { Reducer } from 'redux';
+import {
+  ProductsState,
+  ProductsActions,
+  ProductsActionTypes,
+} from './productsTypes';
+
+const initialProductState: ProductsState = {
+  products: [],
+  productsLoading: false,
+};
+
+export const productsReducer: Reducer<ProductsState, ProductsActions> = (
+  state = initialProductState,
+  action
+) => {
+  switch (action.type) {
+    case ProductsActionTypes.LOADING: {
+      return {
+        ...state,
+        productsLoading: true,
+      };
+    }
+    case ProductsActionTypes.GETALL: {
+      return {
+        ...state,
+        products: action.products,
+        productsLoading: false,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};

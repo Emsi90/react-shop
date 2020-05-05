@@ -1,7 +1,7 @@
 import React from 'react';
-import { Product as IProduct } from 'ts/interfaces/Product';
-import Tabs from 'Components/Tabs';
-import withLoader from 'Hoc/withLoader';
+import { Product as IProduct } from 'constants/interfaces/Product';
+import Tabs from 'components/Tabs';
+import withLoader from 'hoc/withLoader';
 import './Product.scss';
 
 interface Props {

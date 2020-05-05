@@ -4,7 +4,7 @@ export interface ActiveCard {
   name: string;
   content: string | React.ReactNode;
 }
-export interface ITabsContext {
+export interface ContextTabs {
   activeCard?: ActiveCard;
   setActiveCard?: (obj: ActiveCard) => void;
 }
@@ -15,6 +15,6 @@ export interface TabProps {
   heading: () => string | React.ReactNode;
 }
 
-export interface ITabs {
+export interface TabsBody {
   Tab: React.FC<TabProps>;
 }

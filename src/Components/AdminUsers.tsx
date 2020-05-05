@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import AdminUser from './AdminUser';
 
-import { adminUsersData } from 'Data/UserData';
+import { adminUsersData } from 'data/UserData';
 
 const AdminUsers: React.FC = () => {
   return (

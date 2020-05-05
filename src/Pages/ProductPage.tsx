@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { getProduct } from 'Data/ProductData';
-import { Product as IProduct } from 'ts/interfaces/Product';
-import Product from 'Components/Product';
+import { getProduct } from 'data/ProductData';
+import { Product as IProduct } from 'constants/interfaces/Product';
+import Product from 'components/Product';
 
 type Props = RouteComponentProps<{ id: string }>;
 
