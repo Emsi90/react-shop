@@ -1,40 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
-import { products } from 'data/ProductData';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 import { Product } from 'constants/interfaces/Product';
+import { ApplicationState } from 'store/store';
+import { getProducts } from 'store/products/productsActions';
+import ProductList from 'components/ProductsList';
 
-const ProductsPage: React.FC<RouteComponentProps> = (props) => {
-  const [productsState, setProductsState] = useState<Product[]>([]);
+interface Props extends RouteComponentProps {
+  getProducts: typeof getProducts;
+  loading: boolean;
+  products: Product[];
+}
+
+const ProductsPage: React.FC<Props> = (props) => {
+  const productsState = useSelector((store: ApplicationState) => ({
+    loading: store.products.productsLoading,
+    products: store.products.products,
+  }));
+  const dispatch = useDispatch();
   const [search, setSearch] = useState<string>('');
-  useEffect(() => {
-    setProductsState(products);
+
+  const handleSearch = useCallback(() => {
     const searchParams = new URLSearchParams(props.location.search);
     const search = searchParams.get('search') || '';
     setSearch(search);
   }, [props.location.search]);
 
+  useEffect(() => {
+    dispatch(getProducts());
+    handleSearch();
+  }, [dispatch, handleSearch]);
+
   return (
     <div className='page-container'>
       <p>Welcome to React Shop where you can get all your tools for ReactJS!</p>
-      <ul className='product-list'>
-        {productsState.map((product) => {
-          if (
-            !search ||
-            (search &&
-              product.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
-          ) {
-            return (
-              <li key={product.id} className='product-list-item'>
-                <Link to={`/products/${product.id}`}>{product.name}</Link>
-              </li>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </ul>
+      <ProductList
+        search={search}
+        products={productsState.products}
+        loading={productsState.loading}
+      />
     </div>
   );
 };
+
+// const mapStateToProps = (store: ApplicationState) => {
+//   return {
+//     loading: store.products.productsLoading,
+//     products: store.products.products,
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     getProducts: () => dispatch(getProducts()),
+//   };
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);
 
 export default ProductsPage;

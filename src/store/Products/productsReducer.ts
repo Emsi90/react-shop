@@ -7,6 +7,7 @@ import {
 
 const initialProductState: ProductsState = {
   products: [],
+  currentProduct: null,
   productsLoading: false,
 };
 
@@ -25,6 +26,13 @@ export const productsReducer: Reducer<ProductsState, ProductsActions> = (
       return {
         ...state,
         products: action.products,
+        productsLoading: false,
+      };
+    }
+    case ProductsActionTypes.GETSINGLE: {
+      return {
+        ...state,
+        currentProduct: action.product,
         productsLoading: false,
       };
     }

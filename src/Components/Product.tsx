@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Product as IProduct } from 'constants/interfaces/Product';
 import Tabs from 'components/Tabs';
 import withLoader from 'hoc/withLoader';
 import './Product.scss';
+
+interface LikeState {
+  likes: number;
+  lastLike: Date | null;
+}
+
+const initialLikeState: LikeState = {
+  likes: 0,
+  lastLike: null,
+};
+
+enum LikeActionTypes {
+  LIKE = 'LIKE',
+}
+
+interface LikeAction {
+  type: LikeActionTypes.LIKE;
+  now: Date;
+}
+
+type LikeActions = LikeAction;
+
+const reducer = (state: LikeState = initialLikeState, action: LikeActions) => {
+  switch (action.type) {
+    case LikeActionTypes.LIKE:
+      return { ...state, likes: state.likes + 1, lastLike: action.now };
+  }
+  return state;
+};
 
 interface Props {
   product?: IProduct | null;
@@ -11,9 +40,19 @@ interface Props {
 }
 
 const Product: React.FC<Props> = ({ product, inBasket, onAddToBakset }) => {
+  const [{ likes, lastLike }, dispatch]: [
+    LikeState,
+    (action: LikeAction) => void
+  ] = useReducer(reducer, initialLikeState);
+
+  const handleLikeClick = () => {
+    dispatch({ type: LikeActionTypes.LIKE, now: new Date() });
+  };
+
   if (!product) {
     return null;
   }
+
   return (
     <>
       <h1>{product.name}</h1>
@@ -42,6 +81,14 @@ const Product: React.FC<Props> = ({ product, inBasket, onAddToBakset }) => {
         }).format(product.price)}
       </p>
       {!inBasket && <button onClick={onAddToBakset}>Add to basket</button>}
+      <div className='like-container'>
+        {likes > 0 && (
+          <div>{`I like this x ${likes}, last at ${lastLike}`}</div>
+        )}
+        <button onClick={handleLikeClick}>
+          {likes > 0 ? 'Like again' : 'Like'}
+        </button>
+      </div>
     </>
   );
 };
